@@ -13,6 +13,7 @@ public class PostsApiController {
 
     private final PostsService postsService;
 
+    // 등록 - Insert
     @PostMapping("/api/vi/posts")
     public Long save(
             @RequestBody PostsSaveRequestDto requestDto
@@ -21,6 +22,7 @@ public class PostsApiController {
         return postsService.save(requestDto);
     }
 
+    // 수정 - Update
     @PutMapping("/api/v1/posts/{id}")
     public Long update(
             @PathVariable Long id
@@ -30,11 +32,22 @@ public class PostsApiController {
         return postsService.update(id, requestDto);
     }
 
+    // 조회 - Select
     @GetMapping("/api/v1/posts/{id}")
     public PostsResponseDto findById(
         @PathVariable Long id
     ){
 
         return postsService.findById(id);
+    }
+
+    // 삭제 - Delete
+    @DeleteMapping("/api/v1/posts/{id}")
+    public Long delete(
+        @PathVariable Long id
+    ){
+
+        postsService.delete(id);
+        return id;
     }
 }
